@@ -3,12 +3,12 @@ version: '3'
 
 services:
   web:
-    build: ./smartsanthe
+    build: ./smartsanthe/smartsanthe
 #    command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn smartsanthe.wsgi --bind 0.0.0.0:8000
     volumes:
-      - ./smartsanthe/:/smartsanthe/
-      - static_volume:/smartsanthe/static
+      - ./smartsanthe/smartsanthe:/smartsanthe
+      - ./smartsanthe/smartsanthe/static:/smartsanthe/static
     ports:
       - 8000:8000
 
@@ -18,7 +18,8 @@ services:
       - 1337:80
     volumes:
       - ./nginx/nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
-      - static_volume:/smartsanthe/static
+      - ./smartsanthe/smartsanthe/static:/static
+      - ./smartsanthe/smartsanthe:/smartsanthe
 
 
 volumes:
